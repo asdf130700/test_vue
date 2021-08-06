@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="top">
     <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
       <el-menu-item index="1">Processing Center</el-menu-item>
       <el-submenu index="2">
@@ -33,3 +33,9 @@
         }
     }
 </script>
+<style>
+  .top{
+    height: 100px;
+  }
+</style>
+

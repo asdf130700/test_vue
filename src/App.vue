@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-  <router-view name="top"></router-view>
+    <Topnav/>
     <router-view></router-view>
 
 
@@ -8,13 +8,13 @@
 </template>
 
 <script>
-    //import HelloWorld from './components/HelloWorld.vue'
+    import Topnav from './components/Topnav'
 
     export default {
         // name: 'App',
-        // components: {
-        //     HelloWorld
-        // }
+        components: {
+            Topnav
+         }
     }
 </script>
 

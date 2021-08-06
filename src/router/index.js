@@ -15,9 +15,11 @@ export default new VueRouter({
       path :'',
       name : 'home',
       component: HelloWorld,
-      children: [
-
-      ]
+      // children: [{
+      //   path :'top',
+      //   component :Topnav,
+      // },
+      // ]
     },
     {
       path: '/login',

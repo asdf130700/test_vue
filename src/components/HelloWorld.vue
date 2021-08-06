@@ -1,79 +1,134 @@
 <template>
-  <div id="app">
-    <el-form ref="form" :model="form" label-width="120px">
-      <el-form-item label="Activity name">
-        <el-input v-model="form.name"></el-input>
+  <div>
+    <el-form
+      class="login-form"
+      :inline="true"
+      :model="formInline"
+      :rules="rules"
+      ref="form"
+      @submit.native.prevent="login"
+    >
+      <el-form-item prop="username">
+        <el-input v-model="model.username" placeholder="Username" prefix-icon="el-icon-user" />
       </el-form-item>
-      <el-form-item label="Activity zone">
-        <el-select v-model="form.region" placeholder="please select your zone">
-          <el-option label="Zone one" value="shanghai"></el-option>
-          <el-option label="Zone two" value="beijing"></el-option>
-        </el-select>
+      <el-form-item prop="password">
+        <el-input v-model="model.password" placeholder="Password" type="password" prefix-icon="el-icon-key"/>
       </el-form-item>
-      <el-form-item label="Activity time">
-        <el-col :span="11">
-          <el-date-picker type="date" placeholder="Pick a date" v-model="form.date1" style="width: 100%;"></el-date-picker>
-        </el-col>
-        <el-col class="line" :span="2">-</el-col>
-        <el-col :span="11">
-          <el-time-picker placeholder="Pick a time" v-model="form.date2" style="width: 100%;"></el-time-picker>
-        </el-col>
+      <el-form-item prop="password">
+        <el-input v-model="model.password" placeholder="Password" type="password" prefix-icon="el-icon-key"/>
       </el-form-item>
-      <el-form-item label="Instant delivery">
-        <el-switch v-model="form.delivery"></el-switch>
+      <el-form-item prop="password">
+        <el-input v-model="model.password" placeholder="Password" type="password" prefix-icon="el-icon-key"/>
       </el-form-item>
-      <el-form-item label="Activity type">
-        <el-checkbox-group v-model="form.type">
-          <el-checkbox label="Online activities" name="type"></el-checkbox>
-          <el-checkbox label="Promotion activities" name="type"></el-checkbox>
-          <el-checkbox label="Offline activities" name="type"></el-checkbox>
-          <el-checkbox label="Simple brand exposure" name="type"></el-checkbox>
-        </el-checkbox-group>
+      <el-form-item prop="password">
+        <el-input v-model="model.password" placeholder="Password" type="password" prefix-icon="el-icon-key"/>
       </el-form-item>
-      <el-form-item label="Resources">
-        <el-radio-group v-model="form.resource">
-          <el-radio label="Sponsor"></el-radio>
-          <el-radio label="Venue"></el-radio>
-        </el-radio-group>
-      </el-form-item>
-      <el-form-item label="Activity form">
-        <el-input type="textarea" v-model="form.desc"></el-input>
-      </el-form-item>
+
       <el-form-item>
-        <el-button type="primary" @click="onSubmit">Create</el-button>
-        <el-button>Cancel</el-button>
+        <el-button
+          :loading="loading"
+          class="login-button"
+          type="primary"
+          native-type="submit"
+          block
+        >Login</el-button>
       </el-form-item>
     </el-form>
   </div>
 </template>
+
 <script>
+    import router from "../router/index.js"
     export default {
-        name : 'HelloWorld',
+        name: "login",
         data() {
             return {
-                form: {
-                    name: '',
-                    region: '',
-                    date1: '',
-                    date2: '',
-                    delivery: false,
-                    type: [],
-                    resource: '',
-                    desc: ''
+                validCredentials: {
+                    username: "12345",
+                    password: "12345",
+                    ttl : 600,
+
+                },
+                model: {
+                    username: "",
+                    password: "",
+                    ttlOptions: [
+                        {value: 180, label: '3분간 로그인 유지'},
+                        {value: 300, label: '5분간 로그인 유지'},
+                        {value: 600, label: '10분간 로그인 유지'},
+                        {value: 1800, label: '30분간 로그인 유지'},
+                        {value: 6000, label: '60분간 로그인 유지'}
+                    ],
+
+
+                },
+                loading: false,
+                rules: {
+                    username: [
+                        {
+                            required: true,
+                            message: "Username is required",
+                            trigger: "blur"
+                        },
+                        {
+                            min: 4,
+                            message: "Username length should be at least 5 characters",
+                            trigger: "blur"
+                        }
+                    ],
+                    password: [
+                        { required: true, message: "Password is required", trigger: "blur" },
+                        {
+                            min: 5,
+                            message: "Password length should be at least 5 characters",
+                            trigger: "blur"
+                        }
+                    ]
                 }
-            }
+            };
         },
         methods: {
-            onSubmit() {
-                console.log('submit!');
-                alert('submit');
+            simulateLogin() {
+                return new Promise(resolve => {
+                    setTimeout(resolve, 800);
+                });
+            },
+            async login() {
+                let valid = await this.$refs.form.validate();
+                if (!valid) {
+                    return;
+                }
+                this.loading = true;
+                await this.simulateLogin();
+                this.loading = false;
+                if (
+                    this.model.username === this.validCredentials.username &&
+                    this.model.password === this.validCredentials.password
+                ) {
+                    this.$message.success("Login successfull");
+                    await router.push("/login")
+                } else {
+                    this.$message.error("Username or password is invalid");
+                }
             }
         }
-    }
+    };
 </script>
-<style>
-  #app{
-    width: 80%;
-    margin: 0 auto;
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
+  .login {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .login-button {
+    width: 100%;
+    margin-top: 40px;
+  }
+  .login-form {
+    //width: 350px;
   }
 </style>
