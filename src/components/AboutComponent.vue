@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="#app">
     <el-form ref="form" :model="form" label-width="120px">
       <el-form-item label="Activity name">
         <el-input v-model="form.name"></el-input>
@@ -48,7 +48,6 @@
 </template>
 <script>
     export default {
-        name : 'HelloWorld',
         data() {
             return {
                 form: {
@@ -66,14 +65,7 @@
         methods: {
             onSubmit() {
                 console.log('submit!');
-                alert('submit');
             }
         }
     }
 </script>
-<style>
-  #app{
-    width: 80%;
-    margin: 0 auto;
-  }
-</style>
