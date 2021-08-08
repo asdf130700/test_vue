@@ -8,18 +8,22 @@
       ref="form"
       @submit.native.prevent="login"
     >
+    <div>
       <el-form-item prop="username">
         <el-input v-model="model.username" placeholder="Username" prefix-icon="el-icon-user" />
       </el-form-item>
       <el-form-item prop="password">
         <el-input v-model="model.password" placeholder="Password" type="password" prefix-icon="el-icon-key"/>
       </el-form-item>
+    </div>
+    <div>
       <el-form-item prop="password">
         <el-input v-model="model.password" placeholder="Password" type="password" prefix-icon="el-icon-key"/>
       </el-form-item>
       <el-form-item prop="password">
         <el-input v-model="model.password" placeholder="Password" type="password" prefix-icon="el-icon-key"/>
       </el-form-item>
+    </div>
       <el-form-item prop="password">
         <el-input v-model="model.password" placeholder="Password" type="password" prefix-icon="el-icon-key"/>
       </el-form-item>
@@ -129,6 +133,7 @@
     margin-top: 40px;
   }
   .login-form {
-    //width: 350px;
+    width: 100%;
+    margin: 0 auto;
   }
 </style>

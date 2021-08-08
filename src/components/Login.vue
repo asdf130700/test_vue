@@ -28,6 +28,13 @@
             native-type="submit"
             block
           >Login</el-button>
+                  </el-form-item>
+        <el-form-item>
+          <el-button
+            :loading="loading"
+            class="signup-button"
+            block
+          >Sign Up</el-button>
         </el-form-item>
       </el-form>
     </el-card>
@@ -123,12 +130,15 @@
 
   .login-button {
     width: 100%;
-    margin-top: 40px;
+    margin-top: 20px;
   }
   .login-form {
     width: 350px;
   }
-  .forgot-password {
+  /* .forgot-password {
     margin-top: 10px;
+  } */
+  .signup-button{
+    width: 100%;
   }
 </style>

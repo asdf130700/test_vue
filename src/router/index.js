@@ -6,6 +6,9 @@ import About from '../components/AboutComponent'
 import Home from '../components/HomeComponent'
 import HelloWorld from '../components/HelloWorld' // 로그인 컴포넌트를 import 한다
 import Topnav from "@/components/Topnav";
+import Enroll from "@/components/Enroll";
+import SignUp from "@/components/SignUp";
+
 Vue.use(VueRouter)
 
 export default new VueRouter({
@@ -27,6 +30,11 @@ export default new VueRouter({
       component: Login,
     },
     {
+      path: '/enroll',
+      name: 'Enroll',
+      component: Enroll,
+    },
+    {
       path :'/main',
       name : 'main',
       component: Main,
@@ -45,6 +53,11 @@ export default new VueRouter({
       path :'/top',
       name : 'top',
       component: Topnav,
+    },
+    {
+      path :'/sign',
+      name : 'sign',
+      component: SignUp,
     },
   ]
 })
