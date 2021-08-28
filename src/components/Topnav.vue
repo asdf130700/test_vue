@@ -1,7 +1,9 @@
 <template>
   <div class="top">
     <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+      <!-- <el-menu-item index="1" @click="$router.push({name : 'about'})">Home</el-menu-item> -->
       <el-menu-item index="1">Home</el-menu-item>
+       <!-- router :to="{name:'about'}" exact-->
       <el-submenu index="2">
         <template slot="title">Menu</template>
         <el-menu-item v-for="item in items" v-bind:key="item" index="2-1">{{item}}</el-menu-item>
@@ -31,7 +33,10 @@
         methods: {
             handleSelect(key, keyPath) {
                 console.log(key, keyPath);
-            }
+            },
+            // test(){
+            //   alert('클릭');
+            // },
         }
     }
 </script>
